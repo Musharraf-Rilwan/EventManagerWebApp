@@ -1,0 +1,15 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  windows:
+    generate: true
+    image_path: "assets/images/dmu_logo1.png"
+    icon_size: 48
+  web:
+    generate: true
+    image_path: "assets/images/dmu_logo1.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  image_path: "assets/images/dmu_logo1.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/dmu_logo1.png"
