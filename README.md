@@ -17,12 +17,9 @@ A comprehensive event management system built with **Flutter** and **Firebase**,
 ## ✨ Features
 
 - 🎟️ Ticket Booking System  
-- 📊 Event Analytics and Statistics  
 - 📄 PDF Ticket Generation  
-- 🔐 Role-Based Access Control  
-- 🔐 Google Sign-In Integration  
+- 🔐 Role-Based Access Control    
 - 🔐 Firebase Authentication  
-- ☁️ Cloud Storage for Event Media  
 - 🔔 Real-time Event Updates  
 
 ## 👥 User Roles
