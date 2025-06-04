@@ -20,7 +20,6 @@ A comprehensive event management system built with **Flutter** and **Firebase**,
 - 📊 Event Analytics and Statistics  
 - 📄 PDF Ticket Generation  
 - 🔐 Role-Based Access Control  
-- 📱 Cross-Platform Support (iOS, Android, Web)  
 - 🔐 Google Sign-In Integration  
 - 🔐 Firebase Authentication  
 - ☁️ Cloud Storage for Event Media  
