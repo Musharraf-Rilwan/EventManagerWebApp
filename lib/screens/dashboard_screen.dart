@@ -173,11 +173,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(color: Colors.black, width: 1),
-        ),
-        backgroundColor: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -187,58 +182,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
               children: [
                 Text(
                   event.title,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  'Type: ${event.type}',
-                  style: const TextStyle(color: Colors.black87),
-                ),
+                Text('Type: ${event.type}'),
                 const SizedBox(height: 8),
-                Text(
-                  'Description: ${event.description}',
-                  style: const TextStyle(color: Colors.black87),
-                ),
+                Text('Description: ${event.description}'),
                 const SizedBox(height: 8),
-                Text(
-                  'Location: ${event.location}',
-                  style: const TextStyle(color: Colors.black87),
-                ),
+                Text('Location: ${event.location}'),
                 const SizedBox(height: 8),
                 Text(
                   'Date: ${event.date.day}/${event.date.month}/${event.date.year}',
-                  style: const TextStyle(color: Colors.black87),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  'Time: ${event.time.format(context)}',
-                  style: const TextStyle(color: Colors.black87),
-                ),
+                Text('Time: ${event.time.format(context)}'),
                 const SizedBox(height: 16),
                 if (event.ticketInfo != null) ...[
-                  const Divider(color: Colors.black),
+                  const Divider(),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Ticket Information',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Price: \$${event.ticketInfo!.price.toStringAsFixed(2)}',
-                    style: const TextStyle(color: Colors.black87),
+                    'Price: \1${event.ticketInfo!.price.toStringAsFixed(2)}',
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'Available Tickets: ${event.ticketInfo!.availableQuantity}/${event.ticketInfo!.totalQuantity}',
-                    style: const TextStyle(color: Colors.black87),
                   ),
                 ],
                 const SizedBox(height: 24),
@@ -252,17 +224,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               Navigator.of(context).pop();
                               _registerForEvent(event);
                             },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
                       child: Text(
                         event.ticketInfo != null
                             ? event.ticketInfo!.availableQuantity > 0
@@ -280,7 +241,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         const Text(
                           'You are registered for this event',
                           style: TextStyle(
-                            color: Colors.red,
+                            color: Colors.green,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -290,9 +251,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Navigator.of(context).pop();
                             _unregisterFromEvent(event);
                           },
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.red,
-                          ),
                           child: const Text('Cancel Registration'),
                         ),
                       ],
@@ -309,32 +267,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Container(
-          height: 120,
-          width: 240,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.all(12),
-          child: Image.asset(
-            'assets/images/dmu_logo1.png',
-            fit: BoxFit.contain,
-          ),
-        ),
-        centerTitle: true,
+        title: const Text('Available Events'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh, color: Colors.black),
+            icon: const Icon(Icons.refresh),
             onPressed: _loadEvents,
           ),
           if (_authService?.currentUser != null)
             IconButton(
-              icon: const Icon(Icons.logout, color: Colors.black),
+              icon: const Icon(Icons.logout),
               onPressed: () async {
                 try {
                   await _authService?.signOut();
@@ -350,14 +292,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.red))
+          ? const Center(child: CircularProgressIndicator())
           : _events.isEmpty
-              ? const Center(
-                  child: Text(
-                    'No events available',
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
-                )
+              ? const Center(child: Text('No events available'))
               : ListView.builder(
                   padding: const EdgeInsets.all(16),
                   itemCount: _events.length,
@@ -369,52 +306,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 .contains(_authService?.currentUser?.uid);
 
                     return Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(color: Colors.black, width: 1),
-                      ),
                       child: ListTile(
-                        title: Text(
-                          event.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
+                        title: Text(event.title),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              event.type,
-                              style: const TextStyle(color: Colors.black87),
-                            ),
+                            Text(event.type),
                             Text(
                               'Date: ${event.date.day}/${event.date.month}/${event.date.year}',
-                              style: const TextStyle(color: Colors.black87),
                             ),
-                            Text(
-                              'Location: ${event.location}',
-                              style: const TextStyle(color: Colors.black87),
-                            ),
+                            Text('Location: ${event.location}'),
                             if (event.ticketInfo != null)
                               Text(
                                 'Tickets: ${event.ticketInfo!.availableQuantity}/${event.ticketInfo!.totalQuantity} available - \$${event.ticketInfo!.price.toStringAsFixed(2)}',
-                                style: const TextStyle(color: Colors.black87),
                               ),
                             if (isRegistered)
                               const Text(
                                 'Registered',
                                 style: TextStyle(
-                                  color: Colors.red,
+                                  color: Colors.green,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                           ],
                         ),
                         trailing: IconButton(
-                          icon:
-                              const Icon(Icons.info_outline, color: Colors.red),
+                          icon: const Icon(Icons.info_outline),
                           onPressed: () => _showEventDetails(event),
                         ),
                       ),

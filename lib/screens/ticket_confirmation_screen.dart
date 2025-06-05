@@ -38,7 +38,7 @@ class TicketConfirmationScreen extends StatelessWidget {
       final tempDir = await getTemporaryDirectory();
       final file = File('${tempDir.path}/Event_Ticket_${ticket.id}.pdf');
       await file.writeAsBytes(pdfData);
-      
+
       if (context.mounted) {
         await Share.shareXFiles(
           [XFile(file.path)],
@@ -61,26 +61,16 @@ class TicketConfirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          'Ticket Confirmation',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text('Ticket Confirmation'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.print, color: Colors.red),
+            icon: const Icon(Icons.print),
             tooltip: 'Print Ticket',
             onPressed: () => _printTicket(context),
           ),
           IconButton(
-            icon: const Icon(Icons.share, color: Colors.red),
+            icon: const Icon(Icons.share),
             tooltip: 'Share Ticket',
             onPressed: () => _shareTicket(context),
           ),
@@ -94,21 +84,11 @@ class TicketConfirmationScreen extends StatelessWidget {
             Center(
               child: Text(
                 'Thank you for your purchase!',
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             const SizedBox(height: 24),
             Card(
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: const BorderSide(color: Colors.black, width: 1),
-              ),
-              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -116,53 +96,29 @@ class TicketConfirmationScreen extends StatelessWidget {
                   children: [
                     Text(
                       ticket.eventTitle,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 16),
                     Text(
                       'Purchase Date: ${DateFormat('MMM dd, yyyy').format(ticket.purchaseDate)}',
-                      style: const TextStyle(color: Colors.black87),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      'Ticket ID: ${ticket.id}',
-                      style: const TextStyle(color: Colors.black87),
-                    ),
+                    Text('Ticket ID: ${ticket.id}'),
+                    const SizedBox(height: 8),
+                    Text('Quantity: ${ticket.quantity}'),
                     const SizedBox(height: 8),
                     Text(
-                      'Quantity: ${ticket.quantity}',
-                      style: const TextStyle(color: Colors.black87),
+                      'Total Price: \*${ticket.totalPrice.toStringAsFixed(2)}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 8),
+                    const Divider(height: 32),
                     Text(
-                      'Total Price: \$${ticket.totalPrice.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                      ),
-                    ),
-                    const Divider(height: 32, color: Colors.black),
-                    const Text(
                       'Attendee Information',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      'Name: ${ticket.userName}',
-                      style: const TextStyle(color: Colors.black87),
-                    ),
-                    Text(
-                      'Email: ${ticket.userEmail}',
-                      style: const TextStyle(color: Colors.black87),
-                    ),
+                    Text('Name: ${ticket.userName}'),
+                    Text('Email: ${ticket.userEmail}'),
                   ],
                 ),
               ),
@@ -172,7 +128,7 @@ class TicketConfirmationScreen extends StatelessWidget {
               child: Text(
                 'Use the print or share icons in the top right to get a copy of your ticket.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black54),
+                style: TextStyle(color: Colors.grey),
               ),
             ),
           ],

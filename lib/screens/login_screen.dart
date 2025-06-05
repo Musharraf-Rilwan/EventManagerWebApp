@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text(
                         'Welcome to DMU',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.red,
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                         ),
@@ -136,40 +136,36 @@ class _LoginScreenState extends State<LoginScreen> {
                         value: _selectedRole,
                         decoration: const InputDecoration(
                           labelText: 'Login As',
-                          labelStyle: TextStyle(color: Colors.black),
+                          labelStyle: TextStyle(
+                              color: Color.fromARGB(255, 221, 85, 85)),
                           border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 230, 90, 90)),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          prefixIcon: Icon(Icons.person, color: Colors.black),
+                          prefixIcon: Icon(Icons.person,
+                              color: Color.fromARGB(255, 239, 120, 120)),
                         ),
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 201, 85, 85)),
                         dropdownColor: Colors.white,
                         items: const [
                           DropdownMenuItem(
                             value: UserRole.admin,
                             child: Text('Admin',
-                                style: TextStyle(color: Colors.black)),
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 167, 60, 60))),
                           ),
                           DropdownMenuItem(
                             value: UserRole.organizer,
                             child: Text('Organizer',
-                                style: TextStyle(color: Colors.black)),
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 217, 83, 83))),
                           ),
                           DropdownMenuItem(
                             value: UserRole.attendee,
                             child: Text('Attendee',
-                                style: TextStyle(color: Colors.black)),
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 235, 90, 90))),
                           ),
                         ],
                         onChanged: (value) {
@@ -197,16 +193,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           labelText: 'Email',
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                          ),
+                          labelStyle: TextStyle(color: Colors.black),
                           border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.5),
+                            borderSide: BorderSide(color: Colors.black),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.5),
+                            borderSide: BorderSide(color: Colors.black),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -214,7 +206,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           prefixIcon: Icon(Icons.email, color: Colors.black),
                         ),
-                        style: const TextStyle(color: Colors.black),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
@@ -233,12 +224,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: 'Password',
                           labelStyle: const TextStyle(color: Colors.black),
                           border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.5),
+                            borderSide: BorderSide(color: Colors.black),
                           ),
                           enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.5),
+                            borderSide: BorderSide(color: Colors.black),
                           ),
                           focusedBorder: const OutlineInputBorder(
                             borderSide:
@@ -260,7 +249,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                         ),
-                        style: const TextStyle(color: Colors.black),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
@@ -268,20 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 16),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/forgot-password');
-                          },
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.red,
-                          ),
-                          child: const Text("Forgot Password?"),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 32),
                       ElevatedButton(
                         onPressed: _isLoading ? null : _handleLogin,
                         style: ElevatedButton.styleFrom(

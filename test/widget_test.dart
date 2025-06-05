@@ -13,11 +13,12 @@ import 'package:event_manager/main.dart';
 void main() {
   testWidgets('Login screen smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const EventPlannerApp());
+    await tester
+        .pumpWidget(const MyApp()); // Changed from EventPlannerApp to MyApp
 
-    // Verify that the login screen is shown
+    // Update these expectations to match your actual login screen
     expect(find.text('Event Planner Login'), findsOneWidget);
-    expect(find.byType(TextFormField), findsNWidgets(2)); // Username and password fields
-    expect(find.byType(ElevatedButton), findsOneWidget); // Login button
+    expect(find.byType(TextFormField), findsNWidgets(2));
+    expect(find.byType(ElevatedButton), findsOneWidget);
   });
 }
